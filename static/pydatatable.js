@@ -73,7 +73,6 @@ var FixedDataTablePy = React.createClass({
     return React.createElement("span", null, numeral(cellData).format('0,0.0'));
   },
   _renderCell: function(cellData, cellDataKey, rowData, rowIndex, columnData) {
-    console.log("columnData", columnData);
     if (columnData.numFormat){
       return React.createElement("span", null, numeral(cellData).format(columnData.numFormat));
     }
@@ -101,7 +100,6 @@ var FixedDataTablePy = React.createClass({
     var columnProps = this._buildColumns(this.props.columnParams);
     var columns = [];
     for (var i=0; i < columnProps.length; i++) {
-      console.log("COLPROPS", columnProps[i]);
       columns[i] = React.createElement(Column, columnProps[i]);
     }
     return (
