@@ -4,6 +4,17 @@ var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
 };
+var TableControls = React.createClass({
+  render: function() {
+    return (
+      React.createElement("div", null,
+        React.createElement("input", {
+          onChange: this._onFilterChange, placeholder: "Filter by site"}
+        )
+      )
+    );
+  }
+});
 var FixedDataTablePy = React.createClass({
   getInitialState: function() {
     return {
@@ -11,7 +22,7 @@ var FixedDataTablePy = React.createClass({
       filteredRows: null,
       filterBy: null,
       sortBy: null,
-      sortDir: null
+      sortDir: null,
     };
   },
   componentWillMount: function() {
@@ -26,8 +37,8 @@ var FixedDataTablePy = React.createClass({
   _filterRowsBy: function(filterBy) {
     var rows = this.state.rows;
     var filteredRows = filterBy ? rows.filter(function(row){
-      var code_plus_name = row[0] + row[1];
-      return code_plus_name.toLowerCase().indexOf(filterBy.toLowerCase()) >= 0;
+      var filterField = row[this.props.filterKey];
+      return filterField.toLowerCase().indexOf(filterBy.toLowerCase()) >= 0;
     }) : rows;
     this.setState({filteredRows: filteredRows, filterBy: filterBy});
   },
@@ -85,7 +96,6 @@ var FixedDataTablePy = React.createClass({
     for (var i=0; i < pyCols.length; i++) {
       var colProps = pyCols[i];
       colProps.headerRenderer = this._renderHeader;
-      // colProps.columnData = {'tara': true};
       colProps.cellRenderer = this._renderCell;
       colProps.key = pyCols[i].dataKey;
       cols[i] = colProps;
@@ -97,28 +107,38 @@ var FixedDataTablePy = React.createClass({
     if (this.state.sortDir !== null) {
       sortDirArrow = this.state.sortDir == SortTypes.DESC ? ' ↓' : ' ↑';
     }
+    // Build table
     var columnProps = this._buildColumns(this.props.columnParams);
     var columns = [];
     for (var i=0; i < columnProps.length; i++) {
       columns[i] = React.createElement(Column, columnProps[i]);
     }
-    return (
-      React.createElement("div", null,
-        React.createElement("input", {
-          onChange: this._onFilterChange, placeholder: "Filter by site"}
-        ),
-        React.createElement("br", null
-        ),
-        React.createElement(Table, {
-          rowHeight: 50,
-          rowGetter: this._rowGetter,
-          rowsCount: this.props.rows.length,
-          width: this.props.width,
-          height: this.props.height,
-          headerHeight: 50},
-          columns
-        )
-      )
+    var tbl = React.createElement(Table, {
+      rowHeight: 50,
+      rowGetter: this._rowGetter,
+      rowsCount: this.props.rows.length,
+      width: this.props.width,
+      height: this.props.height,
+      headerHeight: 50},
+      columns
     );
+    // Build table controls if specified
+    if (this.props.filterControl || this.props.exportControl) {
+      return (
+        React.createElement("div", null,
+          React.createElement("input", {
+            onChange: this._onFilterChange, placeholder: "Filter by site"}
+          ),
+          React.createElement(TableControls, {filterKey: this.props.filterKey}),
+          React.createElement("br", null),
+          tbl
+        )
+      );
+    }
+    else {
+      return (
+        React.createElement("div", null, tbl)
+      );
+    }
   }
 });
