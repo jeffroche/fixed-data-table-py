@@ -8,8 +8,20 @@ var TableControls = React.createClass({
   render: function() {
     return (
       React.createElement("div", null,
+        React.createElement(FilterControl, {
+          onFilterChange: this.props.onFilterChange,
+          placeholder: this.props.filterPlaceholder}
+        )
+      )
+    );
+  }
+});
+var FilterControl = React.createClass({
+  render: function() {
+    return (
+      React.createElement("div", null,
         React.createElement("input", {
-          onChange: this._onFilterChange, placeholder: "Filter by site"}
+          onChange: this.props.onFilterChange, placeholder: this.props.placeholder}
         )
       )
     );
@@ -36,8 +48,9 @@ var FixedDataTablePy = React.createClass({
   },
   _filterRowsBy: function(filterBy) {
     var rows = this.state.rows;
+    var filterKey = this.props.filterKey;
     var filteredRows = filterBy ? rows.filter(function(row){
-      var filterField = row[this.props.filterKey];
+      var filterField = row[filterKey];
       return filterField.toLowerCase().indexOf(filterBy.toLowerCase()) >= 0;
     }) : rows;
     this.setState({filteredRows: filteredRows, filterBy: filterBy});
@@ -126,10 +139,9 @@ var FixedDataTablePy = React.createClass({
     if (this.props.filterControl || this.props.exportControl) {
       return (
         React.createElement("div", null,
-          React.createElement("input", {
-            onChange: this._onFilterChange, placeholder: "Filter by site"}
-          ),
-          React.createElement(TableControls, {filterKey: this.props.filterKey}),
+          React.createElement(TableControls, {
+            onFilterChange: this._onFilterChange,
+            filterPlaceholder: this.props.filterPlaceholder}),
           React.createElement("br", null),
           tbl
         )

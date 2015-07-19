@@ -26,18 +26,27 @@ class Column(object):
 class Table(object):
 
     def __init__(self, width, height, row_height, columns, rows,
-                 filter_key=None):
+                 filter=None):
         self.width = width
         self.height = height
         self.row_height = row_height
         self.columns = columns
         self.rows = rows
+        self.filter = filter
 
     def json(self):
-        return json.dumps({
+        table_params = {
             'width': self.width,
             'height': self.height,
             'rowHeight': self.row_height,
             'columnParams': [c.to_dict() for c in self.columns],
             'rows': self.rows,
-        })
+            'filterControl': False
+        }
+        if self.filter is not None:
+            table_params.update({
+                'filterControl': True,
+                'filterKey': self.filter['key'],
+                'filterPlaceholder': self.filter.get('placeholder', '')
+            })
+        return json.dumps(table_params)
