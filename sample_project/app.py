@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from fixed_data_table import Table, Column
+from fixeddatatable import Table, Column
 
 
 app = Flask(__name__)

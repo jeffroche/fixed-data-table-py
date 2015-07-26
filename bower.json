@@ -1,0 +1,22 @@
+{
+  "name": "fixed-data-table-utils",
+  "version": "0.0.0",
+  "authors": [
+    "Jeff Roche <jeff.roche@gmail.com>"
+  ],
+  "description": "Utilities for simplifying the usage of Facebook's FixedDataTable",
+  "main": "fixed-data-table-utils.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fixed-data-table": "~0.4.1",
+    "numeral": "~1.5.3",
+    "react": "~0.13.3"
+  }
+}
