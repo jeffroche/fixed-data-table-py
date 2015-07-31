@@ -8,11 +8,13 @@ var TableControls = React.createClass({
   render: function() {
     return (
       React.createElement("div", null,
-        React.createElement(FilterControl, {
-          onFilterChange: this.props.onFilterChange,
-          placeholder: this.props.filterPlaceholder}
-        ),
-        React.createElement(ExportButton, {clickHandler: this.props.exportHandler})
+        React.createElement("ul", null,
+          React.createElement(FilterControl, {
+            onFilterChange: this.props.onFilterChange,
+            placeholder: this.props.filterPlaceholder}
+          ),
+          React.createElement(ExportButton, {clickHandler: this.props.exportHandler})
+        )
       )
     );
   }
@@ -20,7 +22,7 @@ var TableControls = React.createClass({
 var FilterControl = React.createClass({
   render: function() {
     return (
-      React.createElement("div", null,
+      React.createElement("li", null,
         React.createElement("input", {
           onChange: this.props.onFilterChange, placeholder: this.props.placeholder}
         )
@@ -32,7 +34,10 @@ var FilterControl = React.createClass({
 var ExportButton = React.createClass({
   render: function() {
     return (
-      React.createElement("span", {onClick: this.props.clickHandler}, "Save")
+      React.createElement("li", null,
+        React.createElement("button", {onClick: this.props.clickHandler},
+          React.createElement("a", null, "Export"))
+      )
     );
   }
 });
@@ -173,7 +178,6 @@ var FixedDataTablePy = React.createClass({
             filterPlaceholder: this.props.filterPlaceholder,
             exportHandler: this._xlsExport
           }),
-          React.createElement("br", null),
           tbl
         )
       );

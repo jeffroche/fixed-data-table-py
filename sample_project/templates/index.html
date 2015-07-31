@@ -1,7 +1,25 @@
 <!doctype html>
 <title>Hello from Flask</title>
 <head>
-  <link href="{{ url_for('static', filename='components/fixed-data-table/dist/fixed-data-table-base.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='components/fixed-data-table/dist/fixed-data-table.css') }}" rel="stylesheet">
+  <style type="text/css">
+    #datatable ul {
+        list-style: none;
+        margin-bottom: 2px;
+        display: block;
+        padding-left: 0;
+    }
+    #datatable li {
+        display: inline;
+    }
+    #datatable input {
+        padding: 10px 8px;
+    }
+    #datatable button {
+        padding: 12px 4px;
+        margin-left: 4px;
+    }
+  </style>
 </head>
 <h1>Hello World!</h1>
 <div id="datatable"></div>
