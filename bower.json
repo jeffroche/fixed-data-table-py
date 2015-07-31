@@ -1,18 +1,21 @@
 {
-  "name": "fixed-data-table-utils",
+  "name": "fixed-data-table-py",
   "version": "0.0.0",
   "authors": [
     "Jeff Roche <jeff.roche@gmail.com>"
   ],
-  "description": "Utilities for simplifying the usage of Facebook's FixedDataTable",
-  "main": "fixed-data-table-utils.js",
+  "description": "Utilities to simplify the usage of FixedDataTable components in Python projects.",
+  "main": "js/datatablewrapper.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "sample_project",
+    "fixeddatatable.py",
+    "setup.py"
   ],
   "dependencies": {
     "fixed-data-table": "~0.4.1",

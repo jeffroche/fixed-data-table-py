@@ -13,7 +13,7 @@ setup(
     version='0.0.0',
     description='Utilities for interfacing with FixedDataTable.js',
     long_description=long_description,
-    url='https://github.com/jeffroche/fixeddatatableutils',
+    url='https://github.com/jeffroche/fixed-datatable-py',
     author='Jeff Roche',
     author_email='jeff.roche@gmail.com',
     license='MIT',
