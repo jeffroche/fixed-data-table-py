@@ -11,7 +11,8 @@ var TableControls = React.createClass({
         React.createElement(FilterControl, {
           onFilterChange: this.props.onFilterChange,
           placeholder: this.props.filterPlaceholder}
-        )
+        ),
+        React.createElement(ExportButton, {clickHandler: this.props.exportHandler})
       )
     );
   }
@@ -24,6 +25,14 @@ var FilterControl = React.createClass({
           onChange: this.props.onFilterChange, placeholder: this.props.placeholder}
         )
       )
+    );
+  }
+});
+
+var ExportButton = React.createClass({
+  render: function() {
+    return (
+      React.createElement("span", {onClick: this.props.clickHandler}, "Save")
     );
   }
 });
@@ -115,6 +124,26 @@ var FixedDataTablePy = React.createClass({
     }
     return cols;
   },
+  _xlsExport: function() {
+    console.log("EXPORT TO XLS");
+    var data = [
+      [1,2,3],
+      [true, false, null, "sheetjs"],
+      ["foo","bar",new Date("2014-02-19T14:30Z"), "0.3"],
+      ["baz", null, "qux"]
+    ];
+    var ws_name = "SheetJS";
+    var wb = new Workbook(), ws = sheet_from_rows_columns(
+      this.props.rows, this.props.columnParams);
+    /* add worksheet to workbook */
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "test.xlsx");
+  },
+  _prepXLSData: function() {
+
+  },
   render: function() {
     var sortDirArrow = '';
     if (this.state.sortDir !== null) {
@@ -141,7 +170,9 @@ var FixedDataTablePy = React.createClass({
         React.createElement("div", null,
           React.createElement(TableControls, {
             onFilterChange: this._onFilterChange,
-            filterPlaceholder: this.props.filterPlaceholder}),
+            filterPlaceholder: this.props.filterPlaceholder,
+            exportHandler: this._xlsExport
+          }),
           React.createElement("br", null),
           tbl
         )

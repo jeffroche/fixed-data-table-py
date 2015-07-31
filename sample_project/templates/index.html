@@ -9,6 +9,9 @@
 <script src="{{ url_for('static', filename='components/numeral/min/numeral.min.js') }}"></script>
 <script src="{{ url_for('static', filename='components/react/react.js') }}"></script>
 <script src="{{ url_for('static', filename='components/fixed-data-table/dist/fixed-data-table.js') }}"></script>
+<script src="{{ url_for('static', filename='components/fixed-data-table-utils/datatableexport.js') }}"></script>
+<script src="{{ url_for('static', filename='components/file-saver.js/FileSaver.js') }}"></script>
+<script src="{{ url_for('static', filename='components/js-xlsx/dist/xlsx.core.min.js') }}"></script>
 <script src="{{ url_for('static', filename='components/fixed-data-table-utils/pydatatable.js') }}"></script>
 <script type="text/javascript">
   var tableData = {{ data_table.json()|safe }};
