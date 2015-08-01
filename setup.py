@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 # To use a consistent encoding
 from codecs import open
 from os import path
@@ -27,8 +27,6 @@ setup(
         'Programming Language :: Python :: 2.7',
     ],
     keywords='js',
-    # You can just specify the packages manually here if your project is
-    # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    packages=['fixeddatatable'],
     install_requires=[],
 )
