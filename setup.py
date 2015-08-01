@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='fixeddatatable',
-    version='0.0.0',
+    version='0.0.1',
     description='Utilities for interfacing with FixedDataTable.js',
     long_description=long_description,
     url='https://github.com/jeffroche/fixed-datatable-py',
