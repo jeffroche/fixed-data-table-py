@@ -34,10 +34,10 @@
 <script src="{{ url_for('static', filename='components/fixed-data-table/dist/fixed-data-table.js') }}"></script>
 <script src="{{ url_for('static', filename='components/file-saver.js/FileSaver.js') }}"></script>
 <script src="{{ url_for('static', filename='components/js-xlsx/dist/xlsx.core.min.js') }}"></script>
-<script src="{{ url_for('static', filename='components/fixed-data-table-py/js/pydatatable.js') }}"></script>
+<script src="{{ url_for('static', filename='components/fixed-data-table-py/js/datatablewrapper.js') }}"></script>
 <script src="{{ url_for('static', filename='components/fixed-data-table-py/js/datatableexport.js') }}"></script>
 <script type="text/javascript">
-  var tableData = {{ data_table.json()|safe }};
+  var tableData = {{ data_table.json|safe }};
   React.render(
     React.createElement(FixedDataTablePy, tableData),
     document.getElementById('datatable')

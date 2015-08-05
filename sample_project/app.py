@@ -18,7 +18,8 @@ def index():
         Column(label='Col 3', key='col3', width=100, num_format='0.0%'),
     ]
     tbl = Table(row_height=50, width=300, height=500, columns=cols, rows=rows,
-                filter={'key': 'col2', 'placeholder': 'Filter by Col 2'})
+                filter={'key': 'col2', 'placeholder': 'Filter by Col 2'},
+                export_filename='SampleProject.xlsx')
     return render_template('index.html', data_table=tbl)
 
 

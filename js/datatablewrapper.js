@@ -144,7 +144,10 @@ var FixedDataTablePy = React.createClass({
     wb.SheetNames.push(ws_name);
     wb.Sheets[ws_name] = ws;
     var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
-    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "test.xlsx");
+    var fileName = 'DataTableExport.xlsx';
+    if (this.props.exportFileName)
+      fileName = this.props.exportFileName;
+    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fileName);
   },
   _prepXLSData: function() {
 

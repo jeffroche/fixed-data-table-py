@@ -13,8 +13,6 @@
     "tests"
   ],
   "dependencies": {
-    "fixed-data-table": "~0.4.1",
-    "numeral": "~1.5.3",
-    "react": "~0.13.3"
+    "fixed-data-table-py": "~0.0.2"
   }
 }

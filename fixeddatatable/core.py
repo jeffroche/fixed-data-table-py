@@ -26,14 +26,16 @@ class Column(object):
 class Table(object):
 
     def __init__(self, width, height, row_height, columns, rows,
-                 filter=None):
+                 filter=None, export_filename=None):
         self.width = width
         self.height = height
         self.row_height = row_height
         self.columns = columns
         self.rows = rows
         self.filter = filter
+        self.export_filename = export_filename
 
+    @property
     def json(self):
         table_params = {
             'width': self.width,
@@ -49,4 +51,6 @@ class Table(object):
                 'filterKey': self.filter['key'],
                 'filterPlaceholder': self.filter.get('placeholder', '')
             })
+        if self.export_filename is not None:
+            table_params.update({'exportFileName': self.export_filename})
         return json.dumps(table_params)
